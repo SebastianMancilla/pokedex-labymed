@@ -1,0 +1,30 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav [style]="{width: '25rem'}">
+        <mat-toolbar class="d-flex justify-content-between">
+            <h1>Menu</h1>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>list</mat-icon>
+            </button>
+        </mat-toolbar>
+
+
+        <mat-nav-list>
+            <mat-list-item   (click)="sidenav.toggle()">
+                <mat-icon>spoke</mat-icon>
+                <mat-label>Pokedex</mat-label>
+            </mat-list-item>
+        </mat-nav-list>
+
+
+    </mat-sidenav>
+
+    <mat-toolbar color="primary" class="d-flex justify-content-between">
+        <button mat-icon-button (click)="sidenav.toggle()" [routerLink]="['/pokedex']">
+            <mat-icon>list</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <div class="container p-2">
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>

@@ -1,0 +1,60 @@
+<div *ngIf="!pokemon else cardPokemon">
+    <div mat-dialog-actions class="d-flex justify-content-between">
+        <button mat-icon-button mat-dialog-close color="warn">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="card text-bg-dark">
+        <img src="/assets/img/psydock_not_found.png" class="card-img" alt="not-found">
+    </div>
+    <h1 class="text-center text-white fs-1 bold">Oppss!!!</h1>
+    <p class="text-center text-white">404_Pokemon not found</p>
+</div>
+
+<ng-template #cardPokemon>
+    <div mat-dialog-actions class="d-flex justify-content-between">
+        <button mat-icon-button mat-dialog-close color="warn">
+            <mat-icon>close</mat-icon>
+        </button>
+        <button mat-button color="accent">
+            <mat-label>{{pokemon.game_indices[3].game_index}}</mat-label>
+            <mat-icon>control_camera</mat-icon>
+        </button>
+    </div>
+  
+    <div class="container p-2">
+        <h1 class="text-center text-white">{{pokemon.name | titlecase}}</h1>
+            <div class="card text-bg-dark">
+                <img [src]="pokemon.sprites.other?.['official-artwork']?.front_shiny" class="card-img" [alt]="pokemon.name">
+            </div>
+        <br>
+        <mat-divider></mat-divider>
+    
+        <div class="d-flex flex-row gap-3">
+    
+            <h2 class="text-white">Abilities: </h2>
+    
+            <mat-chip-listbox *ngFor="let abilities of pokemon.abilities">
+                <mat-chip color="primary"
+                    (click)="openAbilityDialog(abilities.ability.name)">{{abilities.ability.name}}</mat-chip>
+            </mat-chip-listbox>
+        </div>
+    
+        <mat-divider></mat-divider>
+    
+        |<div class="d-flex justify-content-between">
+            <button mat-button color="warn">
+                <mat-label>HP: {{pokemon.base_experience}}</mat-label>
+                <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-button>
+                <mat-label>WH: {{pokemon.weight}}</mat-label>
+                <mat-icon>scale</mat-icon>
+            </button>
+            <button mat-button color="accent">
+                <mat-label>XP: {{pokemon.base_experience}}</mat-label>
+                <mat-icon>science</mat-icon>
+            </button>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,36 @@
+<br>
+<h1 class="text-white text-center fw-bold fs-1">Welcome to the Pokedex!!!</h1>
+<br>
+<mat-divider></mat-divider>
+<br>
+<h1 class="text-white text-center fw-bold fs-3">What is your favorite pokemon?</h1>
+
+<br>
+<form [formGroup]="searchForm" class="form" (ngSubmit)="search()">
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput formControlName="search" [matAutocomplete]="auto" placeholder="Pikachu...">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let pokemon of pokemons" [value]="pokemon.name">
+        {{pokemon.name | titlecase}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button mat-button type="submit">
+    <mat-icon>search</mat-icon>
+  </button>
+</form>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div *ngFor="let pokemon of pokemons">
+    <div class="col">
+      <div class="card text-bg-dark" (click)="openDialog(pokemon.name)">
+        <img src="/assets/img/Pokeballx.png" class="card-img" alt="{{pokemon.name}}">
+        <div class="card-img-overlay">
+          <h1 class="card-title ">{{pokemon.name | titlecase}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
